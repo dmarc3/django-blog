@@ -5,6 +5,7 @@ from blogging.models import Post, Category
 class CategoryInline(admin.TabularInline):
     model = Category.posts.through
 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     # Include all default post fields
     exclude = ()
@@ -13,8 +14,6 @@ class PostAdmin(admin.ModelAdmin):
         CategoryInline,
     ]
 
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     exclude = ('posts',)
-
-admin.site.register(Post, PostAdmin)
-admin.site.register(Category, CategoryAdmin)
